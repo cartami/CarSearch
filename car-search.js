@@ -35,12 +35,12 @@ const clearContainer = () => {
     document.querySelector("div").innerHTML = "";
 }
 //store JSON response
-let response = null;
+let response = {};
 
 //iterate through the nodelist from querySelectorAll buttons and assign an EventListener to each button
 Array.from(recallInputs).forEach(recallInput => {
     recallInput.addEventListener('click', () => {
-        if (response) {
+        if (year.value===response.storeYear&&make.value===response.storeMake&&model.value===response.storeModel) {
             clearContainer();
             console.log(response.storeData);
             render(response.storeData, response.storeMake);
@@ -66,7 +66,7 @@ Array.from(recallInputs).forEach(recallInput => {
                 //let jsonData = JSON.stringify(data); //parse body into string
                 clearContainer(); //clear the past view whenver a refresh or GET call is made
                 //console.log(data);
-                response = { storeData: data.data, storeMake: make.value }
+                response = { storeData: data.data, storeMake: make.value, storeModel: model.value, storeYear: year.value }
                 console.log(response.storeData);
                 render(response.storeData, response.storeMake);
 
